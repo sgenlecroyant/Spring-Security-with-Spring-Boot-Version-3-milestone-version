@@ -23,7 +23,12 @@ public class Book {
 	private Date editionDate;
 
 	public Book() {
-		// TODO Auto-generated constructor stub
+	}
+
+	public Book(BookBuilder builder) {
+		this.title = builder.getTitle();
+		this.author = builder.getAuthor();
+		this.editionDate = builder.getEditionDate();
 	}
 
 	public Integer getId() {
@@ -57,7 +62,7 @@ public class Book {
 	public void setEditionDate(Date editionDate) {
 		this.editionDate = editionDate;
 	}
-	
+
 	public static BookBuilder newBuilder(BookRequest bookRequest) {
 		return new BookBuilder(bookRequest);
 	}
