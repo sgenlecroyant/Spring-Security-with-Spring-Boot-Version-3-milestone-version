@@ -13,6 +13,9 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.sgenlecroyant.spring.security.auth.Permission;
+import com.sgenlecroyant.spring.security.auth.Role;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -27,7 +30,9 @@ public class SecurityConfig {
 	public SecurityFilterChain getSecurityFilterChain(HttpSecurity httpSecurity) {
 		try {
 			SecurityFilterChain securityFilterChain = httpSecurity.csrf().disable().headers().frameOptions().disable()
-					.and().authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/api/v*/books").hasRole("ADMIN")
+					.and().authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/api/v*/books")
+//					.hasRole(Role.ADMIN_USER.name())
+					.hasAuthority(Permission.RESOURCE_WRITE.getPermission())
 					.requestMatchers(HttpMethod.GET, "/api/v*/books/**").permitAll().anyRequest().authenticated().and()
 					.httpBasic().and().build();
 
@@ -43,12 +48,12 @@ public class SecurityConfig {
 	@Bean
 	public UserDetailsManager getUserDetailsService() {
 		UserDetails admin = User.builder().accountExpired(false).accountLocked(false).credentialsExpired(false)
-				.disabled(false).password(this.passwordEncoder.encode("password")).username("admin").roles("ADMIN")
-				.build();
+				.disabled(false).password(this.passwordEncoder.encode("password")).username("admin")
+				.authorities(Role.ADMIN_USER.getGrantedAuthorities()).build();
 
 		UserDetails regularUser = User.builder().accountExpired(false).accountLocked(false).credentialsExpired(false)
-				.disabled(false).password(this.passwordEncoder.encode("password")).username("regular").roles("REGULAR")
-				.build();
+				.disabled(false).password(this.passwordEncoder.encode("password")).username("regular")
+				.authorities(Role.REGULAR_USER.getGrantedAuthorities()).build();
 		return new InMemoryUserDetailsManager(admin, regularUser);
 	}
 
