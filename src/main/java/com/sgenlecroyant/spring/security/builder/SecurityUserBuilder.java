@@ -4,7 +4,7 @@ import com.sgenlecroyant.spring.security.auth.Role;
 import com.sgenlecroyant.spring.security.entity.User;
 
 public class SecurityUserBuilder {
-	
+
 	private String firstName;
 	private String lastName;
 	private String username;
@@ -14,44 +14,43 @@ public class SecurityUserBuilder {
 	private boolean isCredentialsNonExpired;
 	private boolean isEnabled;
 	private Role role;
-	
+
 	public SecurityUserBuilder() {
 	}
-	
+
 	public SecurityUserBuilder accountNonExpired(boolean isAccountNonExpired) {
 		this.isAccountNonExpired = isAccountNonExpired;
 		return this;
 	}
-	
+
 	public SecurityUserBuilder accountNonLocked(boolean isAccountNonLocked) {
 		this.isAccountNonLocked = isAccountNonLocked;
 		return this;
 	}
-	
+
 	public User build() {
 		return new User(this);
 	}
-	
+
 	public SecurityUserBuilder credentialsNonExpired(boolean isCredentialsNonExpired) {
 		this.isCredentialsNonExpired = isCredentialsNonExpired;
 		return this;
 	}
-	
+
 	public SecurityUserBuilder enabled(boolean isEnabled) {
 		this.isEnabled = isEnabled;
 		return this;
 	}
-	
+
 	public SecurityUserBuilder firstName(String firstName) {
 		this.firstName = firstName;
 		return this;
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
-	
-	
+
 	public String getLastName() {
 		return lastName;
 	}
