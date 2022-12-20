@@ -2,8 +2,10 @@ package com.sgenlecroyant.spring.security.entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.sgenlecroyant.spring.security.api.request.BookRequest;
 import com.sgenlecroyant.spring.security.builder.BookBuilder;
+import com.sgenlecroyant.spring.security.util.DateSerializer;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +22,7 @@ public class Book {
 	private Integer id;
 	private String title;
 	private String author;
+	@JsonSerialize(using = DateSerializer.class)
 	private Date editionDate;
 
 	public Book() {
