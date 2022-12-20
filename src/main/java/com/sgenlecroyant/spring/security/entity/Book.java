@@ -2,6 +2,9 @@ package com.sgenlecroyant.spring.security.entity;
 
 import java.util.Date;
 
+import com.sgenlecroyant.spring.security.api.request.BookRequest;
+import com.sgenlecroyant.spring.security.builder.BookBuilder;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -53,6 +56,10 @@ public class Book {
 
 	public void setEditionDate(Date editionDate) {
 		this.editionDate = editionDate;
+	}
+	
+	public static BookBuilder newBuilder(BookRequest bookRequest) {
+		return new BookBuilder(bookRequest);
 	}
 
 }
