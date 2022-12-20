@@ -2,6 +2,7 @@ package com.sgenlecroyant.spring.security.builder;
 
 import java.util.Date;
 
+import com.sgenlecroyant.spring.security.api.request.BookRequest;
 import com.sgenlecroyant.spring.security.entity.Book;
 
 public class BookBuilder {
@@ -10,7 +11,10 @@ public class BookBuilder {
 	private String author;
 	private Date editionDate;
 
-	public BookBuilder() {
+	public BookBuilder(BookRequest bookRequest) {
+		this.title = bookRequest.getTitle();
+		this.author = bookRequest.getAuthor();
+		this.editionDate = bookRequest.getEditionDate();
 	}
 
 	public String getTitle() {
@@ -41,7 +45,7 @@ public class BookBuilder {
 	}
 
 	public Book build() {
-		return new Book();
+		return new Book(this);
 	}
 
 }
