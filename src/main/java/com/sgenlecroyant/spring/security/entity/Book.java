@@ -1,5 +1,7 @@
 package com.sgenlecroyant.spring.security.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +17,7 @@ public class Book {
 	private Integer id;
 	private String title;
 	private String author;
-	private String editionDate;
+	private Date editionDate;
 
 	public Book() {
 		// TODO Auto-generated constructor stub
@@ -45,11 +47,11 @@ public class Book {
 		this.author = author;
 	}
 
-	public String getEditionDate() {
+	public Date getEditionDate() {
 		return editionDate;
 	}
 
-	public void setEditionDate(String editionDate) {
+	public void setEditionDate(Date editionDate) {
 		this.editionDate = editionDate;
 	}
 
